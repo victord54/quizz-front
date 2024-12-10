@@ -1,23 +1,13 @@
 <script setup>
 import { ref } from "vue";
 
-const questions = [
-  {
-    question: "Quelle est la capitale de la France ?",
-    options: ["Paris", "Londres", "Madrid", "Berlin"],
-    answer: "Paris",
-  },
-  {
-    question: "Quelle est la capitale de l'Espagne ?",
-    options: ["Paris", "Londres", "Madrid", "Berlin"],
-    answer: "Madrid",
-  },
-  {
-    question: "Quelle est la capitale de l'Allemagne ?",
-    options: ["Paris", "Londres", "Madrid", "Berlin"],
-    answer: "Berlin",
-  },
-];
+const questions = ref([]);
+
+const getQuestions = (async) => {
+  const response = await fetch("10.0.100.99:1234/quizz/get");
+  const data = await response.json();
+  questions.value = data;
+};
 
 const currentQuestion = ref(0);
 const score = ref(0);
